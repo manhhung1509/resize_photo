@@ -253,3 +253,11 @@ download_jar "org/springframework" "spring-beans" "5.4.0"
     </library>
 </eclipse-userlibraries>
 
+
+
+============================
+Context: Tôi đang làm một dự án Java legacy migration. Project hiện tại dùng Apache Ant và không được phép chuyển sang Maven hoặc Gradle. Vấn đề chính là khi upgrade TERASOLUNA từ 5.7.0.RELEASE lên 5.8.0.RELEASE hoặc version mới hơn, rất nhiều dependency như Spring, Spring Security, Jackson, MyBatis… sẽ thay đổi. Hiện tại project đang quản lý JAR thủ công trong `/ServerLib/lib/terasoluna5/` và Eclipse `all.userlibraries`, dẫn đến repo nặng, dễ sai version, dễ thiếu transitive dependency và khó maintain.
+
+Yêu cầu: Đề xuất giải pháp vẫn giữ Ant nhưng tự động hóa dependency management. Hướng nên làm là dùng Apache Ivy tích hợp với Ant để resolve dependency từ Maven Central hoặc Nexus nội bộ, retrieve JAR vào `/ServerLib/lib/terasoluna5`, sync JAR cũ/mới, generate lại `all.userlibraries`, và tránh commit JAR vào Git. Cần chuẩn bị các file như `build.xml`, `ivy.xml`, `ivysettings.xml`, `build.properties`, script generate Eclipse user libraries, script verify libs, `.gitignore`, README và migration notes.
+
+

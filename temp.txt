@@ -1,0 +1,4 @@
+JsonNode header = card.path("body").get(0);
+        assertThat(header.path("style").asText()).isEqualTo("accent");
+        assertThat(header.path("items").get(0).path("color").asText())
+                .isEqualTo("Light");
